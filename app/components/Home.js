@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { functest } from '../components/actions';
 import store from '../components/store';
 
 class Home extends Component {
-
     render() {
-        console.log(store.getState());
+        let users = this.props.user;
+        console.log(store);
         return (
             <div>
-                <p onClick={this.props.setData()}>
+                <button onClick={this.props.addUser({ name: 'Bady', age: 22 })}>
                     set
-                </p>
-                <p >
-                    {store.getState().age}
-                </p>
+                </button>
+                <ul>
+                    {users.map((item, index) => {
+                        return (
+                            <li key={index}>{item.name} - {item.age}</li>
+                        )
+                    })}
+                </ul>
             </div>
         );
     }
@@ -23,15 +26,19 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        res: state.resss
+        user: state
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setData: () => {
-            dispatch(functest())
+        addUser: (user) => {
+            dispatch({
+                type: "ADD_USER",
+                payload: user
+            })
         }
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

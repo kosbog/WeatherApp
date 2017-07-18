@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Link, Switch, HashRouter } from 'react-
 import { Provider } from 'react-redux';
 import Home from './Home';
 import NoMatchRoute from './NoMatchRoute';
-import store from '../components/store';
+import configureStore from '../components/store';
+
+const store = configureStore();
 
 class App extends Component {
     render() {

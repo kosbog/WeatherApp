@@ -1,15 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import testReducer from '../components/reducers';
+import userReducer from '../components/reducers';
 
-const initialState = {
-    name: "John"
+export default function configureStore(initialState) {
+    const store = createStore(userReducer, initialState);   
+    return store;
 }
-
-const store = createStore(
-    testReducer,
-    initialState,
-    applyMiddleware(thunk)
-);
-
-export default store;

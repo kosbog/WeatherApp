@@ -1,12 +1,19 @@
-const testReducer = (state = initialState, action) => {
+const initialState = [{
+    name: "John",
+    age: 12
+}]
+
+export default function userReducer(state = initialState, action) {
     switch (action.type) {
-        case 'TEST':
-            state = {
+        case 'ADD_USER':
+            return state = [
                 ...state,
-                age: action.res
-            }
+                action.payload
+            ]
+            break;
+        default:
+            return state;
     }
-    return state;
+
 }
 
-export default testReducer;
