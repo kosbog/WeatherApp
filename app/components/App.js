@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, HashRouter } from 'react-router-dom';
 import Home from './Home';
+import NoMatchRoute from './NoMatchRoute';
 
 class App extends Component {
     render() {

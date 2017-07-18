@@ -66,15 +66,4 @@ const Config = {
     ]
 }
 
-if (process.env.NODE_ENV === 'prod') {
-    Config.plugins.push(
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin()
-    );
-}
-
 export default Config;
