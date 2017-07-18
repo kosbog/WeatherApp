@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { functest } from '../components/actions';
+import store from '../components/store';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        
-        this.getApi = this.getApi.bind(this);
-    }
 
-    getApi() {
-        return axios.get('http://api.openweathermap.org/data/2.5/forecast?q=London&APPID=d68695105aded35200638d7b3c1fb997')
-        .then((res)=> {
-            console.log(res);
-        });
-    }
-
-    componentWillMount() {
-        this.getApi();
-    }
-    
     render() {
+        console.log(store.getState());
         return (
-            <div onClick={this.getApi}>
-                home
+            <div>
+                <p onClick={this.props.setData()}>
+                    set
+                </p>
+                <p >
+                    {store.getState().age}
+                </p>
             </div>
         );
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        res: state.resss
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setData: () => {
+            dispatch(functest())
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
