@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-export const addUser = (user) => {
+
+
+const addNewUser = (username, userage) =>{
     return {
         type: "ADD_USER",
-        payload: user
+        payload: {
+            name: username,
+            age: userage
+        }
     }
 }
+
+export default addNewUser;
