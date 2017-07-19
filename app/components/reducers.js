@@ -2,7 +2,7 @@ const initialState = [{
     name: "John",
     age: 12
 }]
- const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_USER':
             return state = [
@@ -12,7 +12,13 @@ const initialState = [{
                     age: action.payload.age
                 }
             ]
-            break;
+        case 'ADD_WEATHER':
+            return state = [
+                ...state,
+                {
+                    weather: action.weather
+                }
+            ]
         default:
             return state;
     }

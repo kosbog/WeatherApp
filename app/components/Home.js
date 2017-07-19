@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import store from '../components/store';
-import  addNewUser  from '../components/actions';
+import  {addNewUser, getWeather}  from '../components/actions';
 
 class Home extends Component {
-    // componentWillMount() {
-    //     this.props.add("Anna");
-    // }
+    componentWillMount() {
+        this.props.getWeather();
+        
+    }
+    componentWillUpdate(nextProps, nextState) {
+        console.log(store.getState());
+    }
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +22,7 @@ class Home extends Component {
 
         this.handleName = this.handleName.bind(this);
         this.handleAge = this.handleAge.bind(this);
+        this.getApi = this.getApi.bind(this);
     }
 
     handleName(e) {
@@ -28,6 +34,10 @@ class Home extends Component {
         this.setState({
             age: e.target.value
         });
+    }
+    getApi(){
+        this.props.getWeather();
+        console.log(store.getState());
     }
 
     setName() {
@@ -53,6 +63,7 @@ class Home extends Component {
                             );
                         })}
                 </ul>
+                <button onClick={this.getApi}>get weather</button>
             </div>
         );
     }
@@ -68,8 +79,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         add: (username, userage) => {
             dispatch(addNewUser(username, userage))
+        },
+        getWeather: ()=>{
+            dispatch(getWeather())
         }
     }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
