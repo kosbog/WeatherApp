@@ -13,16 +13,15 @@ export const addNewUser = (username, userage) => {
 export const setWeather = (weather) => {
     return {
         type: "ADD_WEATHER",
-        weather
+        payload: weather
     }
 }
 
 export const getWeather = () => {
     return (dispatch) => {
-        axios.get('http://api.apixu.com/v1/current.json?key=4d473de92ffd48ad8ff150038171907&q=Paris')
-            .then((res)=>{ return res;})
-            .then((item) => {
-                dispatch(setWeather(item))
+        return axios.get('http://api.apixu.com/v1/current.json?key=4d473de92ffd48ad8ff150038171907&q=Paris')
+            .then((res) => {
+                dispatch(setWeather(res))
             })
             .catch(error => {
                 throw (error);

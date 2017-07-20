@@ -1,43 +1,21 @@
 import React, { Component } from 'react';
+import Weather from './Weather';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import store from '../components/store';
-import  {addNewUser, getWeather}  from '../components/actions';
+import { addNewUser, getWeather } from '../components/actions';
 
 class Home extends Component {
-    componentWillMount() {
-        this.props.getWeather();
-        
-    }
-    componentWillUpdate(nextProps, nextState) {
-        console.log(store.getState());
-    }
-    
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             age: ''
         };
-
-        this.handleName = this.handleName.bind(this);
-        this.handleAge = this.handleAge.bind(this);
-        this.getApi = this.getApi.bind(this);
     }
 
-    handleName(e) {
-        this.setState({
-            name: e.target.value
-        });
-    }
-    handleAge(e) {
-        this.setState({
-            age: e.target.value
-        });
-    }
-    getApi(){
+    componentDidMount() {
         this.props.getWeather();
-        console.log(store.getState());
     }
 
     setName() {
@@ -46,32 +24,28 @@ class Home extends Component {
             name: '',
             age: ''
         });
-        console.log(store.getState());
     }
     render() {
-        let users = this.props.user;
+        let state = this.props.state;
+        if (state.length === 0) {
+            console.log('nonnnn', state);
+            return (
+                <div> no data </div>
+            )
+        }
         return (
-            <div>
-                <input type="text" value={this.state.name} onChange={this.handleName} />
-                <input type="text" value={this.state.age} onChange={this.handleAge} />
-                <button onClick={this.setName.bind(this)}>
-                    set
-                </button>
-                <ul>
-                    {users.map((user, index) => {
-                            return ( <li key={index}>{user.name} - {user.age}</li>
-                            );
-                        })}
-                </ul>
-                <button onClick={this.getApi}>get weather</button>
-            </div>
-        );
+            <ul> recieve {state.map((item, index) => {
+                return (
+                    <li key={index}>{item.weather.data.location.country}</li>
+                )
+            })}</ul>
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        user: state
+        state: state
     }
 }
 
@@ -80,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
         add: (username, userage) => {
             dispatch(addNewUser(username, userage))
         },
-        getWeather: ()=>{
+        getWeather: () => {
             dispatch(getWeather())
         }
     }
