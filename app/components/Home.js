@@ -9,22 +9,27 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            age: ''
+            city: ''
         };
+
+        this.handleCityName = this.handleCityName.bind(this);
+        this.setCity = this.setCity.bind(this);
     }
 
     componentDidMount() {
-        this.props.getWeather();
+        this.props.getWeather('Kiev');
     }
 
-    setName() {
-        this.props.add(this.state.name, this.state.age);
+    handleCityName(e) {
         this.setState({
-            name: '',
-            age: ''
+            city: e.target.value
         });
     }
+
+    setCity() {
+        this.props.getWeather(this.state.city);
+    }
+
     render() {
         let state = this.props.state;
         if (state.length === 0) {
@@ -34,11 +39,16 @@ class Home extends Component {
             )
         }
         return (
-            <ul> recieve {state.map((item, index) => {
-                return (
-                    <li key={index}>{item.weather.location.country}</li>
-                )
-            })}</ul>
+            <div>
+                <input type="text" value={this.state.city} onChange={this.handleCityName} /> 
+                <button onClick={this.setCity}>SET</button>
+                <ul> recieve {state.map((item, index) => {
+                    return (
+                        <li key={index}>{item.weather.location.country}</li>
+                    )
+                })}</ul>
+            </div>
+
         )
     }
 }
@@ -54,8 +64,8 @@ const mapDispatchToProps = (dispatch) => {
         add: (username, userage) => {
             dispatch(addNewUser(username, userage))
         },
-        getWeather: () => {
-            dispatch(getWeather())
+        getWeather: (elem) => {
+            dispatch(getWeather(elem))
         }
     }
 }
