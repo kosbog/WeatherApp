@@ -36,7 +36,7 @@ class Home extends Component {
         return (
             <ul> recieve {state.map((item, index) => {
                 return (
-                    <li key={index}>{item.weather.data.location.country}</li>
+                    <li key={index}>{item.weather.location.country}</li>
                 )
             })}</ul>
         )

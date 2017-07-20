@@ -1,19 +1,9 @@
 import axios from 'axios';
 
-export const addNewUser = (username, userage) => {
-    return {
-        type: "ADD_USER",
-        payload: {
-            name: username,
-            age: userage
-        }
-    }
-}
-
 export const setWeather = (weather) => {
     return {
         type: "ADD_WEATHER",
-        payload: weather
+        payload: weather.data
     }
 }
 
