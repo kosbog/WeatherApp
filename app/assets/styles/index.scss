@@ -7,6 +7,10 @@
     align-items: $align;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-family: 'Roboto', sans-serif;
 }
@@ -22,8 +26,8 @@ html {
 
 .full-forecast {
     @include flex(column, nowrap, space-around, center);
-}
-.forecast-location {
+
+    .forecast-location {
     @include flex(row, nowrap, space-between, baseline);
     padding: 10px;
     border-bottom: 1px solid #000;
@@ -44,6 +48,7 @@ html {
 
 .forecast-info {
     @include flex(row, nowrap, space-between, center);
+    padding: 25px;
 
     .temp {
         @include flex(row, nowrap, flex-start, center);
@@ -53,6 +58,8 @@ html {
         font-size: 46px;
     }
 }
+}
+
 
 .partial-forecast {
      @include flex(row, nowrap, flex-start, center);
