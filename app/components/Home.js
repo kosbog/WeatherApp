@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Weather from './Weather';
+import CurrentWeather from './CurrentWeather';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import store from '../components/store';
@@ -69,7 +69,13 @@ class Home extends Component {
                 <button onClick={this.setCity}>SET</button>
 
                 <div className="weather">
-                    <div className="full-forecast">
+                    <CurrentWeather
+                        weather_data={state}
+                        temporaryCity={this.state.temporaryCity}
+                        weekend={this.state.weekend}
+                        capitalizeFirstLetter={this.capitalizeFirstLetter} />
+
+                    {/*<div className="full-forecast">
                         <div className="forecast-location">
                             <span className="city">{this.state.temporaryCity}</span>
                             {this.state.temporaryCity &&
@@ -92,13 +98,13 @@ class Home extends Component {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>*/}
 
                     <div className="partial-forecast">
                         {
                             forecastWeather.forecast.days.map((item, index) => {
                                 return (
-                                    <div className="item">
+                                    <div className="item" key={index}>
                                         <div className="day">
                                             {item.date}
                                         </div>
