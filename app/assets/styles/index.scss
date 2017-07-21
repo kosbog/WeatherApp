@@ -1,1 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@mixin flex($direction, $wrapping, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrapping;
+    justify-content: $justify;
+    align-items: $align;
+}
 
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.weather {
+    @include flex(column, nowrap, space-around, center);
+    width: 600px;
+
+    div {
+        width: 100%;
+    }
+}
+
+.full-forecast {
+    @include flex(column, nowrap, space-around, center);
+}
+.forecast-location {
+    @include flex(row, nowrap, space-between, baseline);
+    padding: 10px;
+    border-bottom: 1px solid #000;
+
+    .city,
+    .date {
+        font-size: 30px;
+    }
+
+    .city {
+        font-weight: bold;
+    }
+
+    .date {
+        font-style: italic;
+    }
+}
+
+.forecast-info {
+    @include flex(row, nowrap, space-between, center);
+
+    .temp {
+        @include flex(row, nowrap, flex-start, center);
+    }
+
+    .degrees {
+        font-size: 46px;
+    }
+}
+
+.partial-forecast {
+     @include flex(row, nowrap, flex-start, center);
+}

@@ -7,14 +7,15 @@ export const setWeather = (weather) => {
     }
 }
 
+
 export const getWeather = (city) => {
     return (dispatch) => {
-        return axios.get(`http://api.apixu.com/v1/current.json?key=4d473de92ffd48ad8ff150038171907&q=${city}`)
+        return axios.get(`http://api.apixu.com/v1/forecast.json?key=4d473de92ffd48ad8ff150038171907&q=${city}&days=5`)
             .then((res) => {
                 dispatch(setWeather(res))
             })
             .catch(error => {
-                throw (error);
+                alert(error);
             })
     }
 }
