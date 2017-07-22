@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 const CurrentWeather = (props) => {
-    const state = props.weather_data,
-            currentWeather = props.weather_data[0],
-            forecastWeather = props.weather_data[1],
+    const currentWeather = props.weather_data,
             currentDate = {
                 day: props.weekend[new Date().getDay()],
                 date: new Date().getDate()

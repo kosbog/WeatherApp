@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@mixin flex($direction, $wrapping, $justify, $align) {
+@mixin flex($direction,
+$wrapping,
+$justify,
+$align) {
     display: flex;
     flex-direction: $direction;
     flex-wrap: $wrapping;
@@ -15,52 +18,83 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
-.weather {
-    @include flex(column, nowrap, space-around, center);
-    width: 600px;
+ul {
+    list-style: none;
+    padding: 0;
+}
 
+.weather {
+    @include flex(column,
+    nowrap,
+    space-around,
+    center);
+    width: 700px;
     div {
         width: 100%;
     }
 }
 
 .full-forecast {
-    @include flex(column, nowrap, space-around, center);
-
+    @include flex(column,
+    nowrap,
+    space-around,
+    center);
     .forecast-location {
-    @include flex(row, nowrap, space-between, baseline);
-    padding: 10px;
-    border-bottom: 1px solid #000;
-
-    .city,
-    .date {
-        font-size: 30px;
+        @include flex(row,
+        nowrap,
+        space-between,
+        baseline);
+        padding: 10px;
+        border-bottom: 1px solid #000;
+        .city,
+        .date {
+            font-size: 30px;
+        }
+        .city {
+            font-weight: bold;
+        }
+        .date {
+            font-style: italic;
+        }
     }
-
-    .city {
-        font-weight: bold;
-    }
-
-    .date {
-        font-style: italic;
+    .forecast-info {
+        @include flex(row,
+        nowrap,
+        space-between,
+        center);
+        padding: 25px;
+        .temp {
+            @include flex(row,
+            nowrap,
+            flex-start,
+            center);
+        }
+        .degrees {
+            font-size: 46px;
+        }
     }
 }
-
-.forecast-info {
-    @include flex(row, nowrap, space-between, center);
-    padding: 25px;
-
-    .temp {
-        @include flex(row, nowrap, flex-start, center);
-    }
-
-    .degrees {
-        font-size: 46px;
-    }
-}
-}
-
 
 .partial-forecast {
-     @include flex(row, nowrap, flex-start, center);
+    @include flex(row,
+    nowrap,
+    space-around,
+    flex-start);
+    .item {
+        text-align: center;
+        height: 120px;
+        overflow-y: hidden;
+        border-radius: 4px;
+        padding: 10px;
+        transition: .1s;
+        &:hover {
+            transition: .2s;
+            box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.7);
+            overflow-y: visible;
+            height: initial;
+        }
+    }
+    .secondary {
+        text-align: left;
+    }
 }

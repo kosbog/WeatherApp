@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CurrentWeather from './CurrentWeather';
+import Forecast from './Forecast';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import store from '../components/store';
@@ -25,6 +26,7 @@ class Home extends Component {
         this.handleCityName = this.handleCityName.bind(this);
         this.setCity = this.setCity.bind(this);
         this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
+        this.roundNumber = this.roundNumber.bind(this);
     }
 
     componentDidMount() {
@@ -41,6 +43,10 @@ class Home extends Component {
         return str[0].toUpperCase() + str.slice(1);
     }
 
+    roundNumber(numb) {
+        return (`${Math.round(numb)} + &`)
+    }
+
     setCity() {
         this.props.getWeather(this.state.city);
         this.setState({
@@ -50,13 +56,7 @@ class Home extends Component {
     }
 
     render() {
-        const state = this.props.state,
-            currentWeather = this.props.state[0],
-            forecastWeather = this.props.state[1],
-            currentDate = {
-                day: this.state.weekend[new Date().getDay()],
-                date: new Date().getDate()
-            }
+        const state = this.props.state;
 
         if (state.length === 0) {
             return (
@@ -70,55 +70,14 @@ class Home extends Component {
 
                 <div className="weather">
                     <CurrentWeather
-                        weather_data={state}
+                        weather_data={state[0]}
                         temporaryCity={this.state.temporaryCity}
                         weekend={this.state.weekend}
                         capitalizeFirstLetter={this.capitalizeFirstLetter} />
-
-                    {/*<div className="full-forecast">
-                        <div className="forecast-location">
-                            <span className="city">{this.state.temporaryCity}</span>
-                            {this.state.temporaryCity &&
-                                <span className="date">{currentDate.day} {currentDate.date}</span>}
-                        </div>
-                        <div className="forecast-info">
-                            <div className="temp">
-                                <span className="degrees">{currentWeather.current.temp}</span>
-                                <img src={currentWeather.current._icon} alt={currentWeather.current._name} />
-                            </div>
-                            <div className="other">
-                                <ul>
-                                    {
-                                        Object.keys(currentWeather.current.secondary).map((key, index) => {
-                                            return (
-                                                <li key={index}>{this.capitalizeFirstLetter(key)}: {currentWeather.current.secondary[key]}</li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>*/}
-
-                    <div className="partial-forecast">
-                        {
-                            forecastWeather.forecast.days.map((item, index) => {
-                                return (
-                                    <div className="item" key={index}>
-                                        <div className="day">
-                                            {item.date}
-                                        </div>
-                                        <div className="icon">
-                                            <img src={item.day.condition.icon} alt="" />
-                                        </div>
-                                        <div className="temp">
-                                            <span>{item.day.maxtemp_c}-{item.day.mintemp_c}</span>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    <Forecast 
+                    forecast={state[1]}
+                    weekend={this.state.weekend}
+                    capitalizeFirstLetter={this.capitalizeFirstLetter} />
                 </div>
             </div>
 
