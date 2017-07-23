@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
 import Form from './Form';
-import axios from 'axios';
+import NoState from './NoState';
 import { connect } from 'react-redux';
 import store from '../components/store';
 import { addNewUser, getWeather } from '../components/actions';
@@ -64,11 +64,11 @@ class Home extends Component {
 
         if (state.length === 0) {
             return (
-                <div> no data </div>
+                <NoState />
             )
         }
         return (
-            <div>
+            <div className="container">
                 <Form
                     city={this.state.city}
                     setCity={this.setCity}
@@ -87,6 +87,7 @@ class Home extends Component {
                         forecast={state[1]}
                         weekend={this.state.weekend}
                         month={this.state.month}
+                        getDate={this.getDate}
                         roundNumber={this.roundNumber}
                         capitalizeFirstLetter={this.capitalizeFirstLetter} />
                 </div>
