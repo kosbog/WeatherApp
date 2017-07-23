@@ -14,10 +14,6 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' component={Home}></Route>
                         <Route component={NoMatchRoute}></Route>
-                        {/*
-                        <Route exact path='/battle' component={Battle}></Route>
-                        <Route component={NoMatchRoute}></Route>
-                    */}
                     </Switch>
                 </Router>
             </Provider>

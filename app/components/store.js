@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import userReducer from '../components/reducers';
+import weatherReducer from '../components/reducers';
 
 const store = createStore(
-     userReducer,
+     weatherReducer,
      applyMiddleware(logger, thunk)
 );
 
