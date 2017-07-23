@@ -32,21 +32,22 @@ const Forecast = ({
     roundNumber,
     capitalizeFirstLetter
 }) => {
+
     return (
         <div className="partial-forecast">
             {
                 forecast.forecast.days.map((item, index) => {
-                    if (index !== 0) {
+                    if (index) {
                         return (
                             <div className="item" key={index}>
                                 <div className="day">
-                                    {getDate(weekend, month).month}, {getDate(weekend, month).date + index}
+                                    {getDate(weekend, month).month}, {getDate(weekend, month).date}
                                 </div>
                                 <div className="icon">
-                                    <img src={item.day.condition.icon} alt="" />
+                                    <img src={item.icon} alt="" />
                                 </div>
                                 <div className="temp">
-                                    <span className="degree-icon">{roundNumber(item.day.maxtemp_c)}</span> - <span className="degree-icon">{roundNumber(item.day.mintemp_c)}</span>
+                                    <span className="degree-icon">{roundNumber(item.maxtemp_c)}</span> - <span className="degree-icon">{roundNumber(item.mintemp_c)}</span>
                                 </div>
                                 <SecondaryForecast
                                     item={item}
