@@ -8,9 +8,11 @@ class Forecast extends Component {
     render() {
         const forecastWeather = this.props.forecast,
             capitalizeFirstLetter = this.props.capitalizeFirstLetter,
+            roundNumber = this.props.roundNumber,
             currentDate = {
                 day: this.props.weekend[new Date().getDay()],
-                date: new Date().getDate()
+                date: new Date().getDate(),
+                month: this.props.month[new Date().getMonth()]
             };
         return (
             <div className="partial-forecast">
@@ -20,13 +22,13 @@ class Forecast extends Component {
                             return (
                                 <div className="item" key={index}>
                                     <div className="day">
-                                        {currentDate.date + index} {currentDate.date + index}
+                                        {currentDate.month}, {currentDate.date + index}
                                     </div>
                                     <div className="icon">
                                         <img src={item.day.condition.icon} alt="" />
                                     </div>
                                     <div className="temp">
-                                        <span>{item.day.maxtemp_c}-{item.day.mintemp_c}</span>
+                                        <span className="degree-icon">{roundNumber(item.day.maxtemp_c)}</span> - <span className="degree-icon">{roundNumber(item.day.mintemp_c)}</span>
                                     </div>
                                     <div className="secondary">
                                         <ul>
@@ -39,13 +41,8 @@ class Forecast extends Component {
                                                     }
                                                 })
                                             }
-                                            <li>Day temprature: {item.day.maxtemp_c}</li>
-                                            <li>Night temprature: {item.day.mintemp_c}</li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
+                                            <li>Day temprature: <span className="degree-icon"> {roundNumber(item.day.maxtemp_c)}</span></li>
+                                            <li>Night temprature: <span className="degree-icon"> {roundNumber(item.day.mintemp_c)}</span></li>
                                         </ul>
                                     </div>
                                 </div>

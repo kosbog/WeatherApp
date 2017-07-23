@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 
-const CurrentWeather = (props) => {
-    const currentWeather = props.weather_data,
-            currentDate = {
-                day: props.weekend[new Date().getDay()],
-                date: new Date().getDate()
-            }
+const CurrentWeather = ({ 
+    weather_data,
+    temporaryCity,
+    weekend,
+    month,
+    getDate,
+    roundNumber,
+    capitalizeFirstLetter
+}) => {
+
     return (
         <div className="full-forecast">
             <div className="forecast-location">
-                <span className="city">{props.temporaryCity}</span>
-                {props.temporaryCity &&
-                    <span className="date">{currentDate.day} {currentDate.date}</span>}
+                <span className="city">{capitalizeFirstLetter(temporaryCity)}</span>
+                {temporaryCity &&
+                    <span className="date">{getDate(weekend, month).day}, {getDate(weekend, month).date}</span>}
             </div>
             <div className="forecast-info">
                 <div className="temp">
-                    <span className="degrees">{currentWeather.current.temp}</span>
-                    <img src={currentWeather.current._icon} alt={currentWeather.current._name} />
+                    <span className="degrees degree-icon">{weather_data.current.temp}</span>
+                    <img src={weather_data.current._icon} alt={weather_data.current._name} />
                 </div>
                 <div className="other">
                     <ul>
                         {
-                            Object.keys(currentWeather.current.secondary).map((key, index) => {
+                            Object.keys(weather_data.current.secondary).map((key, index) => {
                                 return (
-                                    <li key={index}>{props.capitalizeFirstLetter(key)}: {currentWeather.current.secondary[key]}</li>
+                                    <li key={index}>{capitalizeFirstLetter(key)}: {weather_data.current.secondary[key]}</li>
                                 )
                             })
                         }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
+import Form from './Form';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import store from '../components/store';
@@ -12,25 +13,19 @@ class Home extends Component {
         this.state = {
             city: '',
             temporaryCity: 'Kiev',
-            weekend: [
-                'Sunday',
-                'Monday',
-                'Tuesday',
-                'Wednesday',
-                'Thursday',
-                'Friday',
-                'Saturday'
-            ]
+            weekend: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         };
 
         this.handleCityName = this.handleCityName.bind(this);
         this.setCity = this.setCity.bind(this);
         this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
         this.roundNumber = this.roundNumber.bind(this);
+        this.getDate = this.getDate.bind(this);
     }
 
     componentDidMount() {
-        this.props.getWeather('Kiev');
+        this.props.getWeather(this.state.temporaryCity);
     }
 
     handleCityName(e) {
@@ -39,20 +34,29 @@ class Home extends Component {
         });
     }
 
-    capitalizeFirstLetter(str) {
-        return str[0].toUpperCase() + str.slice(1);
-    }
-
-    roundNumber(numb) {
-        return (`${Math.round(numb)} + &`)
-    }
-
-    setCity() {
+    setCity(e) {
+        e.preventDefault();
         this.props.getWeather(this.state.city);
         this.setState({
             temporaryCity: this.state.city,
             city: ""
         });
+    }
+
+    capitalizeFirstLetter(str) {
+        return str[0].toUpperCase() + str.slice(1);
+    }
+
+    getDate(week, month) {
+        return {
+            day: week[new Date().getDay()],
+            date: new Date().getDate(),
+            month: month[new Date().getMonth()]
+        };
+    }
+
+    roundNumber(numb) {
+        return Math.round(numb);
     }
 
     render() {
@@ -65,19 +69,26 @@ class Home extends Component {
         }
         return (
             <div>
-                <input type="text" value={this.state.city} onChange={this.handleCityName} />
-                <button onClick={this.setCity}>SET</button>
+                <Form
+                    city={this.state.city}
+                    setCity={this.setCity}
+                    handleCityName={this.handleCityName} />
 
                 <div className="weather">
                     <CurrentWeather
                         weather_data={state[0]}
                         temporaryCity={this.state.temporaryCity}
                         weekend={this.state.weekend}
+                        month={this.state.month}
+                        getDate={this.getDate}
+                        roundNumber={this.roundNumber}
                         capitalizeFirstLetter={this.capitalizeFirstLetter} />
-                    <Forecast 
-                    forecast={state[1]}
-                    weekend={this.state.weekend}
-                    capitalizeFirstLetter={this.capitalizeFirstLetter} />
+                    <Forecast
+                        forecast={state[1]}
+                        weekend={this.state.weekend}
+                        month={this.state.month}
+                        roundNumber={this.roundNumber}
+                        capitalizeFirstLetter={this.capitalizeFirstLetter} />
                 </div>
             </div>
 
@@ -101,7 +112,5 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

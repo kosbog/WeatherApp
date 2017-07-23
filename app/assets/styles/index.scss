@@ -9,9 +9,20 @@ $align) {
     justify-content: $justify;
     align-items: $align;
 }
+@mixin degree_icon($top,
+$right,
+$fontsize) {
+    content: 'c';
+    display: block;
+    position: absolute;
+    top: $top;
+    right: $right;
+    font-size: $fontsize;
+}
 
 * {
     box-sizing: border-box;
+    position: relative;
 }
 
 html {
@@ -63,14 +74,21 @@ ul {
         space-between,
         center);
         padding: 25px;
+        border-bottom: 1px solid #000;
         .temp {
             @include flex(row,
             nowrap,
-            flex-start,
-            center);
+            center,
+            baseline);
         }
         .degrees {
-            font-size: 46px;
+            font-size: 70px;
+            margin: 0 10px;
+            &:after {
+                @include degree_icon(0,
+                -10px,
+                20px);
+            }
         }
     }
 }
@@ -80,7 +98,9 @@ ul {
     nowrap,
     space-around,
     flex-start);
+    padding: 20px 0;
     .item {
+        cursor: pointer;
         text-align: center;
         height: 120px;
         overflow-y: hidden;
@@ -94,7 +114,30 @@ ul {
             height: initial;
         }
     }
+    .day {
+        font-style: italic;
+        font-size: 18px;
+    }
+    .temp {
+        font-size: 14px;
+        font-weight: bold;
+    }
     .secondary {
         text-align: left;
+    }
+    ul {
+        li {
+            font-size: 14px;
+            margin: 10px;
+        }
+    }
+}
+
+span.degree-icon {
+    margin-right: 6px;
+    &:after {
+        @include degree_icon(-5px,
+        -7px,
+        10px);
     }
 }

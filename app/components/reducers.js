@@ -1,6 +1,6 @@
 const initialState = [];
 
-const userReducer = (state = initialState, action) => {
+const weatherReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_WEATHER':
             return state = [
@@ -10,7 +10,7 @@ const userReducer = (state = initialState, action) => {
                         _icon: action.payload.current.condition.icon,
                         _name: action.payload.current.condition.text,
                         secondary: {
-                            feels: `${action.payload.current.feelslike_c} C`,
+                            feels: `${action.payload.current.feelslike_c}`,
                             wind: `${action.payload.current.wind_kph} km/h, ${action.payload.current.wind_dir}`,
                             humidity: `${action.payload.current.humidity} %`,
                             cloud: `${action.payload.current.cloud} %`,
@@ -29,4 +29,4 @@ const userReducer = (state = initialState, action) => {
     }
 }
 
-export default userReducer;
+export default weatherReducer;
