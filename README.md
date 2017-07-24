@@ -9,4 +9,8 @@
 
 ```npm start``` or ```yarn start```
 
+### Go to 
+
+```http://localhost:8080/```
+
 ### Enjoy it ;)
