@@ -2,14 +2,22 @@ export const capitalizeFirstLetter = (str) => {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-export const getDate = (week, month) => {
-    return {
-        day: week[new Date().getDay()],
-        date: new Date().getDate(),
-        month: month[new Date().getMonth()]
-    };
-}
-
 export const roundNumber = (numb) => {
     return Math.round(numb);
+}
+
+export const parseDate = (elem) => {
+    let tempDay = new Date(elem).toDateString(),
+        dateArr = tempDay.split(' '),
+        firstNumber =dateArr[2][0],
+        secondNumber = dateArr[2][1],
+        date;
+
+        date = firstNumber === '0' ? secondNumber : dateArr[2];
+
+    return { 
+        name: dateArr[0],
+        month: dateArr[1],
+        date: date
+     };
 }

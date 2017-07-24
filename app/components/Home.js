@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
 import Form from './Form';
+import MoreItem from './MoreItem';
 import NoState from './NoState';
 import { connect } from 'react-redux';
 import store from '../components/store';
-import { capitalizeFirstLetter, getDate, roundNumber } from '../utils/utils'
+import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
 import { addNewUser, getWeather } from '../actions/actions';
 
 class Home extends Component {
@@ -13,16 +14,19 @@ class Home extends Component {
         super(props);
         this.state = {
             id: '00',
-            day: '',
             city: '',
+            count: 5,
             temporaryCity: 'Kiev',
-            weekend: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            dateData: {
+                weekend: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            }
         };
 
         this.handleCityName = this.handleCityName.bind(this);
         this.setCity = this.setCity.bind(this);
         this.selectDay = this.selectDay.bind(this);
+        this.rollDays = this.rollDays.bind(this);
     }
 
     componentDidMount() {
@@ -45,11 +49,16 @@ class Home extends Component {
         });
     }
 
-    selectDay(id, day) {
+    selectDay(id) {
         this.setState({
-            id: id,
-            day: day
+            id: id
         });
+    }
+
+    rollDays(bool) {
+        bool === true ?
+            this.setState({ count: this.state.count - 5 }) :
+            this.setState({ count: this.state.count + 5 });
     }
 
     render() {
@@ -69,24 +78,25 @@ class Home extends Component {
 
                 <div className="weather">
                     <CurrentWeather
-                    day={this.state.day}
                         id={this.state.id}
                         weather_data={state[0]}
                         temporaryCity={this.state.temporaryCity}
-                        weekend={this.state.weekend}
-                        month={this.state.month}
-                        getDate={getDate}
+                        dateData={this.state.dateData}
+                        parseDate={parseDate}
                         roundNumber={roundNumber}
                         capitalizeFirstLetter={capitalizeFirstLetter} />
                     <Forecast
-                    id={this.state.id}
+                        id={this.state.id}
+                        count={this.state.count}
                         forecast={state[0]}
-                        weekend={this.state.weekend}
-                        month={this.state.month}
-                        getDate={getDate}
+                        dateData={this.state.dateData}
+                        parseDate={parseDate}
                         roundNumber={roundNumber}
                         capitalizeFirstLetter={capitalizeFirstLetter}
                         selectDay={this.selectDay} />
+                    <MoreItem
+                        rollDays={this.rollDays}
+                        count={this.state.count} />
                 </div>
             </div>
 

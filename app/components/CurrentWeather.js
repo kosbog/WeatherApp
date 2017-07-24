@@ -1,27 +1,41 @@
 import React, { Component } from 'react';
 
 const CurrentWeather = ({
-    day,
     id,
     weather_data,
     temporaryCity,
-    weekend,
-    month,
-    getDate,
+    dateData,
+    parseDate,
     roundNumber,
     capitalizeFirstLetter
 }) => {
-
     return (
         <div className="full-forecast">
             {
                 weather_data.forecast.days.map((item, index) => {
+                    const dateObj = parseDate(item.date);
+
                     if (item.id === id) {
                         return (
                             <div key={index}>
                                 <div className="forecast-location">
                                     <span className="city">{capitalizeFirstLetter(temporaryCity)}</span>
-                                    <span className="date">{day || (`${getDate(weekend, month).month}, ${getDate(weekend, month).date}`)}</span>
+                                    <span className="date">
+                                        {dateData.weekend.map((item, index) => {
+                                            if (item.slice(0, 3) === dateObj.name.slice(0, 3)) {
+                                                return (
+                                                    `${item}, `
+                                                )
+                                            }
+                                        })}
+                                        {dateData.month.map((item, index) => {
+                                            if (item.slice(0, 3) === dateObj.month.slice(0, 3)) {
+                                                return (
+                                                    `${item} `
+                                                )
+                                            }
+                                        })}
+                                        {dateObj.date}</span>
                                 </div>
                                 <div className="forecast-info">
                                     <div className="temp">
