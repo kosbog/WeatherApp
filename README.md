@@ -14,6 +14,6 @@
 ```http://localhost:8080/```
 
 ### Or
-Follow this link ["Check weather in your city"](https://console.firebase.google.com/project/weather-e325c/overview)
+Follow this link ["Check weather in your city"](https://weather-e325c.firebaseapp.com)
 
 ### Enjoy it ;)
