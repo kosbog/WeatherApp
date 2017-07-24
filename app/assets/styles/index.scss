@@ -81,7 +81,7 @@ ul {
 }
 
 .container {
-    width: 700px;
+    width: 1000px;
     margin: 0 auto;
 }
 
@@ -217,7 +217,7 @@ form {
         width: 20%;
         cursor: pointer;
         text-align: center;
-        height: 140px;
+        height: 165px;
         border-radius: 4px;
         padding: 15px;
         transition: .1s;
@@ -229,8 +229,16 @@ form {
         }
     }
     .day {
-        font-style: italic;
         font-size: 18px;
+        padding: 5px;
+        @include flex(column,
+        wrap,
+        center,
+        center);
+        &-date {
+            font-style: italic;
+            font-size: 15px;
+        }
     }
     .temp {
         font-size: 14px;

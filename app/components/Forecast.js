@@ -4,9 +4,8 @@ const Forecast = ({
     id,
     count,
     forecast,
-    weekend,
-    month,
-    getDate,
+    dateData,
+    parseDate,
     roundNumber,
     capitalizeFirstLetter,
     selectDay
@@ -16,15 +15,34 @@ const Forecast = ({
         <div className="partial-forecast">
             {
                 forecast.forecast.days.map((item, index) => {
-                    const date = `${getDate(weekend, month).month}, ${getDate(weekend, month).date + index}`;
+                    const dateObj = parseDate(item.date);
+
                     if (index < count) {
                         return (
                             <div
                                 className={id === item.id ? "item check" : "item"}
                                 key={index}
-                                onClick={() => selectDay(item.id, date)}>
+                                onClick={() => selectDay(item.id)}>
                                 <div className="day">
-                                    {date}
+                                    <span className="day-name">
+                                        {dateData.weekend.map((item, index) => {
+                                            if (item.slice(0, 3) === dateObj.name.slice(0, 3)) {
+                                                return (
+                                                    item
+                                                )
+                                            }
+                                        })}
+                                    </span>
+                                    <span className="day-date">
+                                        {dateData.month.map((item, index) => {
+                                            if (item.slice(0, 3) === dateObj.month.slice(0, 3)) {
+                                                return (
+                                                    `${item} `
+                                                )
+                                            }
+                                        })}
+                                        {dateObj.date}
+                                    </span>
                                 </div>
                                 <div className="icon">
                                     <img src={item.icon} alt="" />

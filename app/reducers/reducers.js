@@ -8,6 +8,7 @@ const weatherReducer = (state = initialState, action) => {
                     {
                         id: `0${index}`,
                         icon: item.day.condition.icon,
+                        date: item.date,
                         name: item.day.condition.text,
                         sunrise: item.astro.sunrise,
                         sunset: item.astro.sunset,
