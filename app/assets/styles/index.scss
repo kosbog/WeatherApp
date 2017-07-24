@@ -167,7 +167,7 @@ form {
         }
     }
     .forecast-info {
-        @include flex(row,
+        @include flex(column,
         nowrap,
         space-between,
         center);
@@ -175,6 +175,12 @@ form {
         margin-top: 10px;
         background-color: #f5f5dc;
         border-radius: 4px;
+        .info-wrapper {
+            @include flex(row,
+            nowrap,
+            space-between,
+            center);
+        }
         .temp {
             @include flex(row,
             nowrap,
@@ -197,6 +203,31 @@ form {
             center);
             span {
                 font-size: 20px;
+            }
+        }
+        .detail {
+            @include flex(row,
+            nowrap,
+            space-around,
+            center);
+            &-name,
+            &-data {
+                @include flex(row,
+                nowrap,
+                space-around,
+                center);
+            }
+            &-hours {
+                @include flex(row,
+                nowrap,
+                space-around,
+                center);
+            }
+            &-options {
+                @include flex(column,
+                nowrap,
+                space-around,
+                center);
             }
         }
     }

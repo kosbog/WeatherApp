@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+const HourWeather = () => {
+    return (
+        <div>
+
+        </div>
+    )
+}
+
 const CurrentWeather = ({
     id,
     weather_data,
@@ -38,17 +46,35 @@ const CurrentWeather = ({
                                         {dateObj.date}</span>
                                 </div>
                                 <div className="forecast-info">
-                                    <div className="temp">
-                                        <span className="degrees degree-icon">{roundNumber(item.maxtemp)} - {roundNumber(item.mintemp)}</span>
-                                        <img src={item.icon} alt={item.name} />
+                                    <div className="info-wrapper">
+                                        <div className="temp">
+                                            <span className="degrees degree-icon">{roundNumber(item.maxtemp)} - {roundNumber(item.mintemp)}</span>
+                                            <img src={item.icon} alt={item.name} />
+                                        </div>
+                                        <div className="other">
+                                            <span>{item.name}</span>
+                                            <ul>
+                                                <li>Wind: {item.wind} km/h</li>
+                                                <li>Sunrise: {item.sunrise}</li>
+                                                <li>Sunset: {item.sunset}</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div className="other">
-                                        <span>{item.name}</span>
-                                        <ul>
-                                            <li>Wind: {item.wind} km/h</li>
-                                            <li>Sunrise: {item.sunrise}</li>
-                                            <li>Sunset: {item.sunset}</li>
-                                        </ul>
+
+                                    <div className="detail">
+                                        <div className="detail-name"></div>
+                                        {
+                                            item.hour.map((key, index) => {
+                                                if (index % 6 === 0) {
+                                                    return (
+                                                        <div className="detail-data">
+                                                            <div className="detail-hours"></div>
+                                                            <div className="detail-options"></div>
+                                                        </div>
+                                                    )
+                                                }
+                                            })
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -56,6 +82,7 @@ const CurrentWeather = ({
                     }
                 })
             }
+
         </div>
     );
 }
