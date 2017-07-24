@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
 import Form from './Form';
+import MoreItem from './MoreItem';
 import NoState from './NoState';
 import { connect } from 'react-redux';
 import store from '../components/store';
@@ -15,6 +16,7 @@ class Home extends Component {
             id: '00',
             day: '',
             city: '',
+            count: 5,
             temporaryCity: 'Kiev',
             weekend: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -23,6 +25,7 @@ class Home extends Component {
         this.handleCityName = this.handleCityName.bind(this);
         this.setCity = this.setCity.bind(this);
         this.selectDay = this.selectDay.bind(this);
+        this.rollDays = this.rollDays.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +55,16 @@ class Home extends Component {
         });
     }
 
+    rollDays(bool) {
+
+        bool === true ? this.setState({
+            count: this.state.count - 5
+        }) :
+            this.setState({
+                count: this.state.count + 5
+            });
+    }
+
     render() {
         const state = this.props.state;
 
@@ -69,7 +82,7 @@ class Home extends Component {
 
                 <div className="weather">
                     <CurrentWeather
-                    day={this.state.day}
+                        day={this.state.day}
                         id={this.state.id}
                         weather_data={state[0]}
                         temporaryCity={this.state.temporaryCity}
@@ -79,7 +92,8 @@ class Home extends Component {
                         roundNumber={roundNumber}
                         capitalizeFirstLetter={capitalizeFirstLetter} />
                     <Forecast
-                    id={this.state.id}
+                        id={this.state.id}
+                        count={this.state.count}
                         forecast={state[0]}
                         weekend={this.state.weekend}
                         month={this.state.month}
@@ -87,6 +101,9 @@ class Home extends Component {
                         roundNumber={roundNumber}
                         capitalizeFirstLetter={capitalizeFirstLetter}
                         selectDay={this.selectDay} />
+                    <MoreItem
+                        rollDays={this.rollDays}
+                        count={this.state.count} />
                 </div>
             </div>
 
