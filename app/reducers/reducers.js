@@ -20,19 +20,6 @@ const weatherReducer = (state = initialState, action) => {
 
             return state = [
                 {
-                    current: {
-                        temp: action.payload.current.temp_c,
-                        _icon: action.payload.current.condition.icon,
-                        _name: action.payload.current.condition.text,
-                        secondary: {
-                            feels: `${action.payload.current.feelslike_c}`,
-                            wind: `${action.payload.current.wind_kph} km/h, ${action.payload.current.wind_dir}`,
-                            humidity: `${action.payload.current.humidity} %`,
-                            cloud: `${action.payload.current.cloud} %`,
-                        }
-                    }
-                },
-                {
                     forecast: {
                         days: days
                     }

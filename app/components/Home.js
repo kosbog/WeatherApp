@@ -5,12 +5,15 @@ import Form from './Form';
 import NoState from './NoState';
 import { connect } from 'react-redux';
 import store from '../components/store';
-import { addNewUser, getWeather } from '../components/actions';
+import { capitalizeFirstLetter, getDate, roundNumber } from '../utils/utils'
+import { addNewUser, getWeather } from '../actions/actions';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '00',
+            day: '',
             city: '',
             temporaryCity: 'Kiev',
             weekend: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -19,9 +22,7 @@ class Home extends Component {
 
         this.handleCityName = this.handleCityName.bind(this);
         this.setCity = this.setCity.bind(this);
-        this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
-        this.roundNumber = this.roundNumber.bind(this);
-        this.getDate = this.getDate.bind(this);
+        this.selectDay = this.selectDay.bind(this);
     }
 
     componentDidMount() {
@@ -39,24 +40,16 @@ class Home extends Component {
         this.props.getWeather(this.state.city);
         this.setState({
             temporaryCity: this.state.city,
-            city: ""
+            city: "",
+            id: "00"
         });
     }
 
-    capitalizeFirstLetter(str) {
-        return str[0].toUpperCase() + str.slice(1);
-    }
-
-    getDate(week, month) {
-        return {
-            day: week[new Date().getDay()],
-            date: new Date().getDate(),
-            month: month[new Date().getMonth()]
-        };
-    }
-
-    roundNumber(numb) {
-        return Math.round(numb);
+    selectDay(id, day) {
+        this.setState({
+            id: id,
+            day: day
+        });
     }
 
     render() {
@@ -76,20 +69,24 @@ class Home extends Component {
 
                 <div className="weather">
                     <CurrentWeather
+                    day={this.state.day}
+                        id={this.state.id}
                         weather_data={state[0]}
                         temporaryCity={this.state.temporaryCity}
                         weekend={this.state.weekend}
                         month={this.state.month}
-                        getDate={this.getDate}
-                        roundNumber={this.roundNumber}
-                        capitalizeFirstLetter={this.capitalizeFirstLetter} />
+                        getDate={getDate}
+                        roundNumber={roundNumber}
+                        capitalizeFirstLetter={capitalizeFirstLetter} />
                     <Forecast
-                        forecast={state[1]}
+                    id={this.state.id}
+                        forecast={state[0]}
                         weekend={this.state.weekend}
                         month={this.state.month}
-                        getDate={this.getDate}
-                        roundNumber={this.roundNumber}
-                        capitalizeFirstLetter={this.capitalizeFirstLetter} />
+                        getDate={getDate}
+                        roundNumber={roundNumber}
+                        capitalizeFirstLetter={capitalizeFirstLetter}
+                        selectDay={this.selectDay} />
                 </div>
             </div>
 
