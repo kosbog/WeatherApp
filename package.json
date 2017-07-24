@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kosbog/kosbog.github.io.git"
+    "url": "git+https://github.com/kosbog/WeatherApp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kosbog/kosbog.github.io/issues"
+    "url": "https://github.com/kosbog/WeatherApp/issues"
   },
-  "homepage": "https://github.com/kosbog/kosbog.github.io#readme",
+  "homepage": "https://github.com/kosbog/WeatherApp#readme",
   "dependencies": {
     "axios": "^0.16.1",
     "history": "^4.6.1",
@@ -51,6 +51,7 @@
     "css-loader": "^0.28.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.2",
+    "firebase-tools": "^3.9.1",
     "html-minifier": "^3.4.4",
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.2",
