@@ -12,7 +12,7 @@ class App extends Component {
             <Provider store={store}>
                 <Router >
                     <Switch>
-                        <Route path='/' component={Home}></Route>
+                        <Route exact path='/' component={Home}></Route>
                         <Route component={NoMatchRoute}></Route>
                     </Switch>
                 </Router>
