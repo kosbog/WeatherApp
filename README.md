@@ -7,7 +7,7 @@
 
 ### Run app
 
-```npm start``` or ```yarn start```
+```npm run start``` or ```yarn start```
 
 ### Check it in your browser on
 
