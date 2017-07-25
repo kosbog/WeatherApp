@@ -28,7 +28,7 @@ const HourWeather = ({ item, roundNumber }) => {
                                     <span className="item degree-icon">{roundNumber(key.feelslike_c)}</span>
                                     <span className="item">{roundNumber(key.humidity)} %</span>
                                     <span className="item">{roundNumber(key.cloud)} %</span>
-                                    <span className="item">{key.will_it_rain}</span>
+                                    <span className="item">{key.will_it_rain === 1 ? 'Yes' : 'No'}</span>
                                     <span className="item">{roundNumber(key.wind_kph)}, {key.wind_dir}</span>
                                     <span className="item">{roundNumber(key.vis_km)} km</span>
                                 </div>
