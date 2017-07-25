@@ -35,7 +35,7 @@ ul {
     list-style: none;
     padding: 0;
     li {
-        font-size: 14px;
+        font-size: 18px;
         margin: 10px;
     }
 }
@@ -154,7 +154,6 @@ form {
         space-between,
         baseline);
         padding: 10px;
-        border-bottom: 1px solid #d5ccff;
         .city,
         .date {
             font-size: 30px;
@@ -167,14 +166,20 @@ form {
         }
     }
     .forecast-info {
-        @include flex(row,
+        @include flex(column,
         nowrap,
         space-between,
         center);
-        padding: 25px;
-        margin-top: 10px;
+        padding: 5px 25px 25px;
         background-color: #f5f5dc;
         border-radius: 4px;
+        .info-wrapper {
+            @include flex(row,
+            nowrap,
+            space-between,
+            center);
+            box-shadow: 0 5px 6px -5px rgba(0, 0, 0, .7);
+        }
         .temp {
             @include flex(row,
             nowrap,
@@ -182,12 +187,22 @@ form {
             baseline);
         }
         .degrees {
-            font-size: 70px;
+            font-size: 50px;
             margin: 0 10px;
             &:after {
                 @include degree_icon(0,
                 -10px,
                 20px);
+            }
+        }
+        .title {
+            @include flex(row,
+            nowrap,
+            center,
+            center);
+            font-size: 26px;
+            img {
+                margin-right: 10px;
             }
         }
         .other {
@@ -197,6 +212,85 @@ form {
             center);
             span {
                 font-size: 20px;
+            }
+        }
+        .detail {
+            @include flex(row,
+            nowrap,
+            space-around,
+            baseline);
+            padding-top: 45px;
+            .item {
+                height: calc(320px / 9);
+                font-size: 13px;
+                padding-top: 10px;
+                &.name,
+                &.time {
+                    font-weight: bold;
+                    letter-spacing: .3px;
+                }
+            }
+            &-img.item {
+                padding-top: 3px;
+                text-align: center;
+                img {
+                    width: 57%;
+                }
+            }
+            &-name {
+                height: inherit;
+                width: 15%;
+                padding-right: 25px;
+                border-right: 1px solid #d5ccff;
+                @include flex(column,
+                nowrap,
+                space-around,
+                flex-end);
+            }
+            &-data {
+                width: 85%;
+                height: inherit;
+                @include flex(row,
+                nowrap,
+                space-around,
+                center);
+            }
+            &-hours {
+                @include flex(row,
+                nowrap,
+                space-around,
+                center);
+            }
+            &-options {
+                height: inherit;
+                @include flex(column,
+                nowrap,
+                space-around,
+                center);
+                .degree-icon {
+                    &:after {
+                        @include degree_icon(5px,
+                        -8px,
+                        10px);
+                    }
+                }
+                &:before {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    top: 32px;
+                    width: 100%;
+                    border-bottom: 1px solid #d5ccff;
+                }
+                &:after {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    width: 1px;
+                    height: 100%;
+                    background-color: #d5ccff;
+                }
             }
         }
     }

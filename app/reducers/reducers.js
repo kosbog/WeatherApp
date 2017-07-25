@@ -14,7 +14,8 @@ const weatherReducer = (state = initialState, action) => {
                         sunset: item.astro.sunset,
                         maxtemp: item.day.maxtemp_c,
                         mintemp: item.day.mintemp_c,
-                        wind: item.day.maxwind_kph
+                        wind: item.day.maxwind_kph,
+                        hour: item.hour
                     }
                 )
             })
