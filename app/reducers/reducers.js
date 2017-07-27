@@ -28,6 +28,10 @@ const weatherReducer = (state = initialState, action) => {
                 }
             ]
             break;
+        case 'LOADING_WEATHER':
+            return state = {
+                error: true
+            }
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import Forecast from './Forecast';
 import Form from './Form';
 import MoreItem from './MoreItem';
 import NoState from './NoState';
+import NoMatchRoute from './NoMatchRoute';
 import { connect } from 'react-redux';
 import store from '../components/store';
 import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
@@ -62,13 +63,21 @@ class Home extends Component {
     }
 
     render() {
-        const state = this.props.state;
+        const state = this.props.state,
+            error = this.props.load;
 
         if (state.length === 0) {
             return (
                 <NoState />
             )
         }
+
+         if (error === true) {
+            return (
+                <NoState />
+            )
+        }
+
         return (
             <div className="container">
                 <Form
@@ -106,7 +115,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        state: state
+        state: state,
+        load: state.error
     }
 }
 
