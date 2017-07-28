@@ -7,7 +7,6 @@ import NoState from './NoState';
 import NoMatchRoute from './NoMatchRoute';
 import { connect } from 'react-redux';
 import store from '../components/store';
-import cities from '../data/cities.json';
 import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
 import { getWeather } from '../actions/actions';
 
