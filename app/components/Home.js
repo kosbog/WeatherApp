@@ -68,17 +68,18 @@ class Home extends Component {
 
     render() {
         const state = this.props.state,
-            error = this.props.load;
+            error = this.props.error,
+            loading = this.props.loading;
 
-        if (state.length === 0) {
+        if (state.length === 0 || loading) {
             return (
-                <NoState />
+                <NoState  />
             )
         }
 
-        if (error === true) {
+        if (loading || error) {
             return (
-                <NoState />
+                <NoState error={error} />
             )
         }
 
@@ -120,7 +121,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
     return {
         state: state,
-        load: state.error
+        loading: state.loading,
+        error: state.error
     }
 }
 
