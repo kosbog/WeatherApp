@@ -32,6 +32,7 @@ const weatherReducer = (state = initialState, action) => {
             return state = {
                 error: true
             }
+            break;
         default:
             return state;
     }

@@ -7,8 +7,9 @@ import NoState from './NoState';
 import NoMatchRoute from './NoMatchRoute';
 import { connect } from 'react-redux';
 import store from '../components/store';
+import cities from '../data/cities.json';
 import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
-import { addNewUser, getWeather } from '../actions/actions';
+import { getWeather } from '../actions/actions';
 
 class Home extends Component {
     constructor(props) {
@@ -42,6 +43,10 @@ class Home extends Component {
 
     setCity(e) {
         e.preventDefault();
+        if (!this.state.city) {
+            alert('enter a city');
+            return false;
+        }
         this.props.getWeather(this.state.city);
         this.setState({
             temporaryCity: this.state.city,
@@ -72,7 +77,7 @@ class Home extends Component {
             )
         }
 
-         if (error === true) {
+        if (error === true) {
             return (
                 <NoState />
             )
@@ -124,9 +129,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getWeather: (elem) => {
             dispatch(getWeather(elem))
-        },
-        setTown: (town) => {
-            dispatch(setTown(town))
         }
     }
 }
