@@ -33,8 +33,8 @@ const Config = {
                             presets: ['react-optimize']
                         }
                     }
-
-                },
+                }
+            },
             {
                 test: /\.scss?$/,
                 use: extractSass.extract({
