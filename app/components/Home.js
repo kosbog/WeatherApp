@@ -4,10 +4,11 @@ import Forecast from './Forecast';
 import Form from './Form';
 import MoreItem from './MoreItem';
 import NoState from './NoState';
+import NoMatchRoute from './NoMatchRoute';
 import { connect } from 'react-redux';
 import store from '../components/store';
 import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
-import { addNewUser, getWeather } from '../actions/actions';
+import { getWeather } from '../actions/actions';
 
 class Home extends Component {
     constructor(props) {
@@ -41,6 +42,10 @@ class Home extends Component {
 
     setCity(e) {
         e.preventDefault();
+        if (!this.state.city) {
+            alert('enter a city');
+            return false;
+        }
         this.props.getWeather(this.state.city);
         this.setState({
             temporaryCity: this.state.city,
@@ -62,13 +67,22 @@ class Home extends Component {
     }
 
     render() {
-        const state = this.props.state;
+        const state = this.props.state,
+            error = this.props.error,
+            loading = this.props.loading;
 
-        if (state.length === 0) {
+        if (state.length === 0 || loading) {
             return (
-                <NoState />
+                <NoState  />
             )
         }
+
+        if (loading || error) {
+            return (
+                <NoState error={error} />
+            )
+        }
+
         return (
             <div className="container">
                 <Form
@@ -106,7 +120,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        state: state
+        state: state,
+        loading: state.loading,
+        error: state.error
     }
 }
 
@@ -114,9 +130,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getWeather: (elem) => {
             dispatch(getWeather(elem))
-        },
-        setTown: (town) => {
-            dispatch(setTown(town))
         }
     }
 }

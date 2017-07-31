@@ -13,7 +13,7 @@ class App extends Component {
                 <Router >
                     <Switch>
                         <Route exact path='/' component={Home}></Route>
-                        <Route component={NoMatchRoute}></Route>
+                        <Route path='/404' component={NoMatchRoute}></Route>
                     </Switch>
                 </Router>
             </Provider>

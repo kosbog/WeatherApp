@@ -8,7 +8,7 @@ class NoMatch extends Component {
                 <p>Oops!..</p>
                 <p>Probably, the weather here is terrible and there is no signal :(</p>
                 <p>
-                    <NavLink to="/">Try to find out the weather here! ;)</NavLink>
+                    <Link to="/">Try to find out the weather here! ;)</Link>
                 </p>
             </div>
         );

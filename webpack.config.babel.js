@@ -21,9 +21,20 @@ const Config = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 options: {
-                    presets: ['react', 'env', 'stage-2']
-                }
-            },
+                    presets: ['react', ['env', {
+                        targets: {
+                            browsers: ['last 2 versions']
+                        }
+                    }],
+                        'stage-2'
+                    ],
+                    env: {
+                        production: {
+                            presets: ['react-optimize']
+                        }
+                    }
+
+                },
             {
                 test: /\.scss?$/,
                 use: extractSass.extract({
@@ -64,6 +75,17 @@ const Config = {
         }),
         extractSass
     ]
+}
+
+if (process.env.NODE_ENV === 'prod') {
+    Config.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin()
+    );
 }
 
 export default Config;
