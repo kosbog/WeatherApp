@@ -9,6 +9,9 @@ import { connect } from 'react-redux';
 import store from '../components/store';
 import { capitalizeFirstLetter, roundNumber, parseDate } from '../utils/utils'
 import { getWeather } from '../actions/actions';
+import * as firebase from "firebase";
+import axios from 'axios';
+import cities from '../data/cities.json'
 
 class Home extends Component {
     constructor(props) {
@@ -28,10 +31,30 @@ class Home extends Component {
         this.setCity = this.setCity.bind(this);
         this.selectDay = this.selectDay.bind(this);
         this.rollDays = this.rollDays.bind(this);
+        this.initFirebaseSDK = this.initFirebaseSDK.bind(this);
     }
 
     componentDidMount() {
         this.props.getWeather(this.state.temporaryCity);
+        this.initFirebaseSDK();
+    }
+
+    initFirebaseSDK() {
+        const config = {
+            apiKey: "AIzaSyAGTYpuGCfHmT6ZHPtwwnUVHPMoWGknSks",
+            authDomain: "weather-e325c.firebaseapp.com",
+            databaseURL: "https://weather-e325c.firebaseio.com",
+            storageBucket: "weather-e325c.appspot.com",
+        };
+        firebase.initializeApp(config);
+        const firebaseData = firebase.database().ref('cities');
+        const arr = [];
+        cities.map(elem => {
+            return firebaseData.set({
+                city: elem
+            })
+        });
+
     }
 
     handleCityName(e) {
@@ -70,10 +93,9 @@ class Home extends Component {
         const state = this.props.state,
             error = this.props.error,
             loading = this.props.loading;
-
         if (state.length === 0 || loading) {
             return (
-                <NoState  />
+                <NoState />
             )
         }
 
