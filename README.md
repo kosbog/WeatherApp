@@ -9,11 +9,6 @@
 
 ```npm run start``` or ```yarn start```
 
-### Check it in your browser on
+### Check it in your browser
 
 ```http://localhost:8080/```
-
-### Or
-Follow this link ["Check weather in your city"](https://weather-e325c.firebaseapp.com)
-
-### Enjoy it ;)
