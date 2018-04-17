@@ -65,41 +65,43 @@ const CurrentWeather = ({
     return (
         <div className="full-forecast">
             {weather_data.forecast.days.map((item, index) => {
-                    const { date, day, month } = parseDate(item.date);
-                    
-                    if (item.id === id) {
-                        return (
-                            <div key={index}>
-                                <div className="forecast-location">
-                                    <span className="city">{capitalizeFirstLetter(temporaryCity)}</span>
-                                    <span className="date">
-                                        {day}, {month} {date}
-                                    </span>
-                                </div>
-                                <div className="forecast-info">
-                                    <div className="info-wrapper">
-                                        <div className="temp">
-                                            <span className="degrees degree-icon">{roundNumber(item.maxtemp)} - {roundNumber(item.mintemp)}</span>
-                                        </div>
-                                        <div className="title">
-                                            <img src={item.icon} alt={item.name} />
-                                            <span>{item.name}</span>
-                                        </div>
-                                        <div className="other">
-                                            <ul>
-                                                <li>Sunrise: {item.sunrise}</li>
-                                                <li>Sunset: {item.sunset}</li>
-                                            </ul>
-                                        </div>
+                const { date, day, month } = parseDate(item.date);
+                console.log(item);
+
+                if (item.id === id) {
+                    return (
+                        <React.Fragment key={index}>
+                            <div className="forecast-location">
+                                <span className="city">{capitalizeFirstLetter(temporaryCity)}</span>
+                                <span className="date">
+                                    {day}, {month} {date}
+                                </span>
+                            </div>
+                            <div className="forecast-info">
+                                <div className="info-wrapper">
+                                    <div className="temp">
+                                    <span className="degrees degree-icon">{roundNumber(item.maxtemp)}</span>
+                                    <span className="degrees degree-icon">{roundNumber(item.mintemp)}</span>
                                     </div>
-                                    {/* <HourWeather
+                                    <div className="title">
+                                        <img src={item.icon} alt={item.name} />
+                                        <span>{item.name}</span>
+                                    </div>
+                                    <div className="other">
+                                        <ul>
+                                            <li>Sunrise: {item.sunrise}</li>
+                                            <li>Sunset: {item.sunset}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {/* <HourWeather
                                         item={item}
                                         roundNumber={roundNumber} /> */}
-                                </div>
                             </div>
-                        )
-                    }
-                })
+                        </React.Fragment>
+                    )
+                }
+            })
             }
         </div>
     );
