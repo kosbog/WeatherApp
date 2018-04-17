@@ -92,21 +92,21 @@ form {
     center);
     padding: 30px 0;
     input {
+        width: 25%;
         outline: none;
         text-align: center;
-        width: 30%;
         height: 45px;
         font-size: 28px;
         padding: 0 15px;
         border: none;
         transition: .2s;
-        margin-right: 10px;
         &:focus {
             transition: .3s;
             box-shadow: 0px 7px 20px -14px #000;
         }
     }
     button {
+        width: 25%;
         outline: none;
         border: none;
         height: 45px;
@@ -124,7 +124,7 @@ form {
             content: '';
             position: absolute;
             top: 0;
-            left: -6px;
+            left: 0;
             border-left: 2px solid #002e57;
             height: inherit;
         }
@@ -170,25 +170,31 @@ form {
         nowrap,
         space-between,
         center);
-        padding: 5px 25px 25px;
+        padding: 10px 0;
         background-color: #f5f5dc;
         border-radius: 4px;
+        box-shadow: 0 7px 20px -10px rgba(0, 0, 0, .7);
+        
         .info-wrapper {
             @include flex(row,
             nowrap,
             space-between,
             center);
-            box-shadow: 0 5px 6px -5px rgba(0, 0, 0, .7);
         }
         .temp {
             @include flex(row,
             nowrap,
             center,
-            baseline);
+            center);
+            width: 20%;
+            font-size: 35px;
         }
         .degrees {
             font-size: 50px;
-            margin: 0 10px;
+            margin-left: 10px;
+            &:nth-child(1) {
+                margin-right: 20px;
+            }
             &:after {
                 @include degree_icon(0,
                 -10px,
@@ -200,6 +206,8 @@ form {
             nowrap,
             center,
             center);
+            width: 60%;
+            padding: 0 20px;
             font-size: 26px;
             img {
                 margin-right: 10px;
@@ -210,6 +218,7 @@ form {
             nowrap,
             space-around,
             center);
+            width: 20%;
             span {
                 font-size: 20px;
             }
@@ -302,10 +311,10 @@ form {
     flex-start,
     flex-start);
     width: inherit;
-    padding-top: 20px;
-    padding-bottom: 0;
+    padding: 40px 0 20px;
     .check {
         background-color: #f5f5dc;
+        box-shadow: 0 7px 20px -10px rgba(0, 0, 0, .7);
     }
     .item {
         width: 20%;

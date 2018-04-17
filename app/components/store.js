@@ -5,7 +5,7 @@ import weatherReducer from '../reducers/reducers';
 
 const store = createStore(
      weatherReducer,
-     applyMiddleware(logger, thunk)
+     applyMiddleware(thunk)
 );
 
 export default store;
