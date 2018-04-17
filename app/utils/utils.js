@@ -7,17 +7,17 @@ export const roundNumber = (numb) => {
 }
 
 export const parseDate = (elem) => {
-    let tempDay = new Date(elem).toDateString(),
-        dateArr = tempDay.split(' '),
-        firstNumber =dateArr[2][0],
-        secondNumber = dateArr[2][1],
-        date;
+    const weekendArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        date = firstNumber === '0' ? secondNumber : dateArr[2];
+    const currDate = new Date(elem),
+        date = currDate.getDate().toString(),
+        day = weekendArr.filter((day, index) => index === currDate.getDay()).toString(),
+        month = monthArr.filter((month, index) => index + 1 === currDate.getMonth()).toString();
 
-    return { 
-        name: dateArr[0],
-        month: dateArr[1],
+    return {
+        day: day,
+        month: month,
         date: date
-     };
+    };
 }

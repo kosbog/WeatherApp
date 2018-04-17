@@ -25,7 +25,7 @@ export const getWeather = (city) => {
     return (dispatch) => {
         dispatch(loadingWeather(true));
 
-        axios.get(`https://api.apixu.com/v1/forecast.json?key=4d473de92ffd48ad8ff150038171907&q=${city}&days=10`)
+        axios.get(`https://api.apixu.com/v1/forecast.json?key=56e8cac9c11e4819bcf115316181704&q=${city}&days=10&hour=23`)
             .then(res => {
                 if (!res) {
                     return false;
