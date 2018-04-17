@@ -33,7 +33,7 @@ const Forecast = ({
                                     <img src={item.icon} alt="" />
                                 </div>
                                 <div className="temp">
-                                    <span className="degree-icon">{roundNumber(item.maxtemp)}</span> - <span className="degree-icon">{roundNumber(item.mintemp)}</span>
+                                    <span className="degree-icon">{roundNumber(item.maxtemp)}</span> / <span className="degree-icon">{roundNumber(item.mintemp)}</span>
                                 </div>
                             </div>
                         )

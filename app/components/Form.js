@@ -8,7 +8,7 @@ const Form = ({ city, setCity, handleCityName }) => {
                 value={city}
                 onChange={handleCityName}
                 placeholder="e.g. New York" />
-            <button type="submit">Choose city</button>
+            <button type="submit">Select a city</button>
         </form>
     );
 }

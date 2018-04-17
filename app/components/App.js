@@ -5,7 +5,6 @@ import Home from './Home';
 import NoMatchRoute from './NoMatchRoute';
 import store from '../components/store';
 
-
 class App extends Component {
     render() {
         return (
@@ -13,7 +12,7 @@ class App extends Component {
                 <Router >
                     <Switch>
                         <Route exact path='/' component={Home}></Route>
-                        <Route path='/404' component={NoMatchRoute}></Route>
+                        <Route component={NoMatchRoute}></Route>
                     </Switch>
                 </Router>
             </Provider>

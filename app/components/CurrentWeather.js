@@ -66,7 +66,6 @@ const CurrentWeather = ({
         <div className="full-forecast">
             {weather_data.forecast.days.map((item, index) => {
                 const { date, day, month } = parseDate(item.date);
-                console.log(item);
 
                 if (item.id === id) {
                     return (
@@ -80,8 +79,8 @@ const CurrentWeather = ({
                             <div className="forecast-info">
                                 <div className="info-wrapper">
                                     <div className="temp">
-                                    <span className="degrees degree-icon">{roundNumber(item.maxtemp)}</span>
-                                    <span className="degrees degree-icon">{roundNumber(item.mintemp)}</span>
+                                        <span className="degrees degree-icon">{roundNumber(item.maxtemp)}</span>/
+                                        <span className="degrees degree-icon">{roundNumber(item.mintemp)}</span>
                                     </div>
                                     <div className="title">
                                         <img src={item.icon} alt={item.name} />
